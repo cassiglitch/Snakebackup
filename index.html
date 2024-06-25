@@ -3890,7 +3890,15 @@ changeInterval(150)
 }else if (currentInterval === 1.5 && isSlow === false && isEarthed === false){
 changeInterval(100)
 }
-    
+if (lords.length === 3){
+spawnLords(2,3)
+}
+if (lords.length === 2){
+spawnLords(2,3)
+}
+if (lords.length === 1){
+spawnLords(2,3)
+}            
 // Handle eating animation
             if (isEating) {
                 eatingAnimationFrames--;
