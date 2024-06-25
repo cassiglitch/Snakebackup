@@ -3889,14 +3889,14 @@ changeInterval(150)
 }else if (currentInterval === 1.5 && isSlow === false && isEarthed === false){
 changeInterval(100)
 }
-if (lords.length === 3){
-spawnLords(2,3)
+if (lords.length === 3 && firelord.length ===0&& icelord.length ===0 && lightninglord.length === 0 && earthlord.length === 0){
+spawnLord(2,3)
 }
-if (lords.length === 2){
-spawnLords(2,3)
+if (lords.length === 2 && firelord.length ===0&& icelord.length ===0 && lightninglord.length === 0 && earthlord.length === 0){
+spawnLord(2,3)
 }
-if (lords.length === 1){
-spawnLords(2,3)
+if (lords.length === 1 && firelord.length ===0&& icelord.length ===0 && lightninglord.length === 0 && earthlord.length === 0){
+spawnLord(2,3)
 }            
 // Handle eating animation
             if (isEating) {
