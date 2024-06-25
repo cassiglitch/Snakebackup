@@ -717,18 +717,9 @@ function ManageTurrets() {
         let lordcanspawn = true
    let lords = [firelord, lightninglord, icelord, earthlord]; // Possible directions
 
-function waitForSelectedLordToBeEmpty(selectedLord) {
-    return new Promise((resolve) => {
-        const checkInterval = setInterval(() => {
-            if (selectedLord.length === 0) {
-                clearInterval(checkInterval);
-                resolve();
-            }
-        }, 100); // Check every 100ms
-    });
-}
 
-async function spawnLord(x, y) {
+
+ function spawnLord(x, y) {
     if (lords.length === 0) {
         console.log("All lords have been spawned.");
         return;
@@ -756,8 +747,6 @@ async function spawnLord(x, y) {
     // Recursively call spawnLord if there are still lords to spawn
 }
 
-// Example usage
-spawnLord(2, 3);
 function checkDistance(snake) {
     wells.forEach((well) => {
       const distance = Math.abs(snake[0].x - well.x) + Math.abs(snake[0].y - well.y);
@@ -1887,19 +1876,11 @@ function kamekDeath() {
     if (!iskamekdead) {
         const randomX = Math.floor(Math.random() * (canvas.width / gridSize));
         const randomY = Math.floor(Math.random() * (canvas.height / gridSize));
-        const randomX2 = Math.floor(Math.random() * (canvas.width / gridSize));
-        const randomY2 = Math.floor(Math.random() * (canvas.height / gridSize));
-        const randomX3 = Math.floor(Math.random() * (canvas.width / gridSize));
-        const randomY3 = Math.floor(Math.random() * (canvas.height / gridSize));
-        const randomX4 = Math.floor(Math.random() * (canvas.width / gridSize));
-        const randomY4 = Math.floor(Math.random() * (canvas.height / gridSize));
         
         let gridOffset = ((2 * gridSize) + (gridSize / 2)) / 2;
 
         createPortalAnimation(randomX * gridSize, randomY * gridSize, 50, 2000);
-        createPortalAnimation(randomX2 * gridSize, randomY2 * gridSize, 50, 2000);
-        createPortalAnimation(randomX3 * gridSize, randomY3 * gridSize, 50, 2000);
-        createPortalAnimation(randomX4 * gridSize, randomY4 * gridSize, 50, 2000);
+    
 
         turrets.forEach((turret) => {
             createPortalAnimation(turret.x * gridSize, turret.y * gridSize, 30, 2000);
@@ -1918,10 +1899,7 @@ function kamekDeath() {
             kamek = [];
             turrets = [];
             goombas = [];
-            firelord.push({ x: randomX, y: randomY });
-            lightninglord.push({ x: randomX2, y: randomY2 });
-            icelord.push({ x: randomX3, y: randomY3 });
-            earthlord.push({ x: randomX4, y: randomY4 });
+            spawnLord(randomX, randomY)
         }, 1100);
 
         setTimeout(() => {
