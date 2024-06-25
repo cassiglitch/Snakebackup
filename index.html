@@ -747,14 +747,13 @@ async function spawnLord(x, y) {
     console.log("Remaining lords:", lords);
     
     // Wait until selectedLord is empty before proceeding
-    await waitForSelectedLordToBeEmpty(selectedLord);
+
     
     // Remove the selected lord from the array
     lords.splice(randomIndex, 1);
     lordcanspawn = true;
 
     // Recursively call spawnLord if there are still lords to spawn
-    await spawnLord(x, y);
 }
 
 // Example usage
