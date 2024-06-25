@@ -716,32 +716,51 @@ function ManageTurrets() {
 }
         let lordcanspawn = true
    let lords = [firelord, lightninglord, icelord, earthlord]; // Possible directions
-    function spawnLord(x,y) {
-        if (lords.length === 0) {
-            console.log("All lords have been spawned.");
-            return;
-        }
-        
-        const randomIndex = Math.floor(Math.random() * lords.length);
-        let selectedLord = lords[randomIndex];
-        if (lordcanspawn === true){
+
+
+function waitForSelectedLordToBeEmpty(selectedLord) {
+    return new Promise((resolve) => {
+        const interval = setInterval(() => {
+            if (selectedLord.length === 0) {
+                clearInterval(interval);
+                resolve();
+            }
+        }, 100); // Check every 100ms
+    });
+}
+
+async function spawnLord(x, y) {
+    if (lords.length === 0) {
+        console.log("All lords have been spawned.");
+        return;
+    }
+    
+    const randomIndex = Math.floor(Math.random() * lords.length);
+    let selectedLord = lords[randomIndex];
+    
+    if (lordcanspawn === true) {
         // Spawn the lord at a random position
         selectedLord.push({ x: x, y: y });
-        lordcanspawn = false
-        }
-        // Check if the selected lord is empty after spawning
-        if (selectedLord.length === 0) {
-            // Remove the selected lord from the array
-            lords.splice(randomIndex, 1);
-            lordcanspawn = true
-            spawnLord(x,y)
-        }
-        
-        console.log("Spawned:", selectedLord);
-        console.log("Remaining lords:", lords);
-        
-        // Continue spawning until all lords have been spawned
+        lordcanspawn = false;
     }
+    
+    // Check if the selected lord is empty after spawning
+    if (selectedLord.length === 0) {
+        // Remove the selected lord from the array
+        lords.splice(randomIndex, 1);
+        lordcanspawn = true;
+        await waitForSelectedLordToBeEmpty(selectedLord);
+        spawnLord(x, y); // Recursively call spawnLord
+    }
+    
+    console.log("Spawned:", selectedLord);
+    console.log("Remaining lords:", lords);
+    
+    // Continue spawning until all lords have been spawned
+}
+
+spawnLord(2, 3);
+
       spawnLord(2,3)
 function checkDistance(snake) {
     wells.forEach((well) => {
