@@ -734,6 +734,7 @@ function ManageTurrets() {
             // Remove the selected lord from the array
             lords.splice(randomIndex, 1);
             lordcanspawn = true
+            spawnLord(x,y)
         }
         
         console.log("Spawned:", selectedLord);
