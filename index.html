@@ -1869,11 +1869,11 @@ function getDirectionToSnakeHead(x, y, snake) {
     return direction;
 }
 let iskamekdead = false;
-
+let onlyoneportal = false
 function kamekDeath() {
     isPaused = true;
 
-    if (!iskamekdead) {
+    if (!onlyoneportal) {
         const randomX = Math.floor(Math.random() * (canvas.width / gridSize));
         const randomY = Math.floor(Math.random() * (canvas.height / gridSize));
         
@@ -1892,21 +1892,17 @@ function kamekDeath() {
 
         createExplosion(ctx, kamek[0].x * gridSize, (kamek[0].y * gridSize) + gridOffset, 'green', obstacles, dynamicObstacles, gridSize, 90);
         createPortalAnimation(kamek[0].x * gridSize, (kamek[0].y * gridSize) + gridOffset, 100, 2000);
-
-        iskamekdead = true;
+onlyoneportal = true
+    
 
         setTimeout(() => {
             kamek = [];
             turrets = [];
             goombas = [];
             timezone = []
-            if (lords.length === 4){
-            const randomIndex = Math.floor(Math.random() * lords.length);
-    let selectedLord = lords[randomIndex];
-        selectedLord.push({ x: randomX, y: randomY });
-        
-    lords.splice(randomIndex, 1);
-            }
+            iskamekdead = true;
+            startX = randomX * gridSize
+            startY = randomY * gridSize
         }, 1100);
 
         setTimeout(() => {
@@ -3700,6 +3696,7 @@ const randomIndex2 = Math.floor(Math.random() * rare.length);
             shield = false
             inverted = false
             turrets = []
+            lords = [firelord, lightninglord, icelord, earthlord]
             goombas = []
             TaxFormGot = false
             createParticles('red');
@@ -3889,13 +3886,14 @@ const randomIndex = Math.floor(Math.random() * lords.length);
     lords.splice(randomIndex, 1);
 }
 if (lords.length === 3 && firelord.length ===0&& icelord.length ===0 && lightninglord.length === 0 && earthlord.length === 0){
+    lords = [firelord, lightninglord, icelord, earthlord]
 const randomIndex = Math.floor(Math.random() * lords.length);
     let selectedLord3 = lords[randomIndex];
         selectedLord3.push({ x: startX/gridSize, y: startY/gridSize });
         
     lords.splice(randomIndex, 1);
 }   
-            if (iskamekdead === true && firelord.length ===0&& icelord.length ===0 && lightninglord.length === 0 && earthlord.length === 0 && lords.length === 4){
+            if (iskamekdead === true && firelord.length ===0&& icelord.length ===0 && lightninglord.length === 0 && earthlord.length === 0){
 const randomIndex = Math.floor(Math.random() * lords.length);
     let selectedLord = lords[randomIndex];
         selectedLord.push({ x: startX/gridSize, y: startY/gridSize });
