@@ -3009,10 +3009,12 @@ switch (direction) {
         track = [{x:head.x, y:head.y + 1}]
         break;
     case 'down':
+        if (GravityApplied === false){
         head.y = (head.y + 1) % (canvas.height / gridSize);
         track = []
         track = [{x:head.x, y:head.y - 1}]
         break;
+        }
     case 'left':
         head.x = (head.x - 1 + canvas.width / gridSize) % (canvas.width / gridSize);
             
@@ -3033,10 +3035,12 @@ switch (direction) {
         track = [{x:head.x, y:head.y + 1}]
         break;
     case 'up':
+        if (GravityApplied === false){
         head.y = (head.y + 1) % (canvas.height / gridSize);
         track = []
         track = [{x:head.x, y:head.y - 1}]
         break;
+        }
     case 'right':
         head.x = (head.x - 1 + canvas.width / gridSize) % (canvas.width / gridSize);
         track = []
