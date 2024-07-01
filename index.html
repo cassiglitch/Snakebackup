@@ -352,14 +352,14 @@ function applyGravity() {
   
   // If no element has reached the bottom and no segment is in the non-affected areas, apply gravity
     if (!inverted){
-  if (!stopGravity && GravityApplied === true && direction !== down) {
+  if (!stopGravity && GravityApplied === true && direction !== 'down') {
     for (let i = 0; i < snake.length; i++) {
       snake[i].y += 1;
     }
   }
 }
 if (inverted){
-  if (!stopGravity && GravityApplied === true && direction !== up) {
+  if (!stopGravity && GravityApplied === true && direction !== 'up') {
     for (let i = 0; i < snake.length; i++) {
       snake[i].y += 1;
     }
