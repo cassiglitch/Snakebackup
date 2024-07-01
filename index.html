@@ -351,13 +351,21 @@ function applyGravity() {
   let stopGravity = snake.some(segment => segment.y === maxY) || shouldStopGravity();
   
   // If no element has reached the bottom and no segment is in the non-affected areas, apply gravity
-  if (!stopGravity && GravityApplied === true) {
+    if (!inverted){
+  if (!stopGravity && GravityApplied === true && direction !== down) {
     for (let i = 0; i < snake.length; i++) {
       snake[i].y += 1;
     }
   }
 }
-
+if (inverted){
+  if (!stopGravity && GravityApplied === true && direction !== up) {
+    for (let i = 0; i < snake.length; i++) {
+      snake[i].y += 1;
+    }
+  }
+}
+}
 function kamekUpdate(){
             if (kamek.length > 1) {
     kamek.length = 1;
@@ -3009,12 +3017,10 @@ switch (direction) {
         track = [{x:head.x, y:head.y + 1}]
         break;
     case 'down':
-        if (GravityApplied === false){
         head.y = (head.y + 1) % (canvas.height / gridSize);
         track = []
         track = [{x:head.x, y:head.y - 1}]
         break;
-        }
     case 'left':
         head.x = (head.x - 1 + canvas.width / gridSize) % (canvas.width / gridSize);
             
@@ -3035,12 +3041,10 @@ switch (direction) {
         track = [{x:head.x, y:head.y + 1}]
         break;
     case 'up':
-        if (GravityApplied === false){
         head.y = (head.y + 1) % (canvas.height / gridSize);
         track = []
         track = [{x:head.x, y:head.y - 1}]
         break;
-        }
     case 'right':
         head.x = (head.x - 1 + canvas.width / gridSize) % (canvas.width / gridSize);
         track = []
